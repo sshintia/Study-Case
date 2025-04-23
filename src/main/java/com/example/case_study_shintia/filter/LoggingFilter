@@ -1,0 +1,46 @@
+package com.example.case_study_shintia.filter;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+@Component
+public class LoggingFilter implements Filter {
+    private static final Logger logger = LogManager.getLogger(LoggingFilter.class);
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+
+        // Mencatat informasi request
+        logger.info("Request Method: {}, Request URI: {}", httpRequest.getMethod(), httpRequest.getRequestURI());
+
+        // Mencatat body request
+        StringBuilder requestBody = new StringBuilder();
+        BufferedReader reader = httpRequest.getReader();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            requestBody.append(line);
+        }
+        logger.info("Request Body: {}", requestBody.toString());
+
+     
+        chain.doFilter(request, response);
+
+        // Mencatat informasi response
+        logger.info("Response Status: {}", httpResponse.getStatus());
+        
+    
+    }
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        // Inisialisasi jika diperlukan
+    }
+
+    @Override
+    public void destroy() {
+        // Cleanup jika diperlukan
+    }
+}

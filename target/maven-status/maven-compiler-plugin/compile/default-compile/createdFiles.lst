@@ -1,0 +1,6 @@
+com\example\case_study_shintia\dto\StockDTO.class
+com\example\case_study_shintia\model\Stock.class
+com\example\case_study_shintia\repository\StockRepository.class
+com\example\case_study_shintia\CaseStudyShintiaApplication.class
+com\example\case_study_shintia\controller\StockController.class
+com\example\case_study_shintia\service\StockService.class
